@@ -1,0 +1,20 @@
+void getAns(int np, int n,int box1, int box2, int box3, vector<int> &ans, int &cnt){
+    if(ans.size() || np == 0)
+        return ; 
+    
+    getAns(np-1,n,box1,box3,box2,ans,cnt) ;
+    
+    if(++cnt == n){
+        ans.push_back(box1) ;
+        ans.push_back(box3) ;
+    }
+    
+    getAns(np-1,n,box2,box1,box3,ans,cnt) ;
+}
+
+vector<int> shiftPile(int np, int n){
+    vector<int> ans ;
+    int cnt = 0 ;
+    getAns(np,n,1,2,3,ans,cnt) ;
+    return ans ;
+}
