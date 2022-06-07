@@ -1,0 +1,27 @@
+Public:
+  TNode* helper(vector<int> &vc,int s,int t){
+      if(s>t) return NULL;
+      
+      int mid =  ceil((float) (s+t)/2);
+      int d = vc[mid];
+      TNode * root = new TNode(d);
+      TNode * leftside = helper(vc,s,mid-1);
+      TNode * rightside = helper(vc,mid+1,t);
+      root->left = leftside;
+      root->right = rightside;
+      return root;
+  }
+    TNode* sortedListToBST(LNode *head) {
+        //code here
+        
+        LNode * temp = head;
+        
+        vector<int> vc;
+        while(temp!=NULL){
+            vc.push_back(temp->data);
+            temp=temp->next;
+        }
+        int n = vc.size();
+        TNode* ans = helper(vc,0,n-1);
+        return ans;
+}
