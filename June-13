@@ -1,0 +1,8 @@
+int isRepeat(string s)
+	{
+	    // Your code goes here
+	    if((s.substr(1) + s.substr(0,s.size()-1)).find(s) != -1)
+	        return 1;
+	    else
+	        return 0;
+	}
