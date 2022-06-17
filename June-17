@@ -1,0 +1,36 @@
+void doDFS(vector<int> adj[], int V, vector<int> &color, int c, bool &isOkay, int i){
+        if(color[i] == 0){
+            color[i] = c;
+        }
+        c = c == 1 ? -1 : 1;
+        for(auto &e : adj[i]){
+            if(color[e] == 0){
+                doDFS(adj, V, color, c, isOkay, e);
+            }
+            else if(color[e] == c){
+                continue;
+            }
+            else{
+                isOkay = false;
+                return;
+            }
+        }
+    }
+
+
+    
+	bool isBipartite(int V, vector<int>adj[]){
+	    vector<int> color(V, 0);
+	    bool isOkay = true;
+	    for(int i = 0; i<V; i++){
+	        if(color[i] == 0){
+	            //1 means green 
+	            //-1 means blue
+	            doDFS(adj, V, color, 1, isOkay, i);
+	            if(isOkay == false){
+	                return false;
+	            }
+	        }
+	    }
+	    return true;
+	}
