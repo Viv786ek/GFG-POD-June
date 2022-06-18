@@ -1,0 +1,33 @@
+class Solution {
+public:
+int vis[11][11];
+    int longestPath(vector<vector<int>> mat, int xs, int ys, int xd, int yd)
+    {
+        // code here
+        memset(vis, 0, sizeof vis);
+        if(mat[xs][ys] == 0 or mat[xd][yd] == 0) return -1;
+        int ans = INT_MIN;
+        dfs(mat, xs, ys, xd, yd, ans, 0);
+        return ans == INT_MIN ? -1 : ans;
+    }
+     void dfs(vector<vector<int>> &mat, int sx, int sy, int &dx, int &dy, int &ans, int cnt) {
+        
+        if(sx == dx and sy == dy) {
+            ans = max(ans, cnt);
+            return;
+        }
+        
+        int n = mat.size(), m = mat[0].size();
+        if(sx < 0 or sy < 0 or sx >= n or sy >= m) return;
+        if(vis[sx][sy] or mat[sx][sy] == 0) return;
+        
+        vis[sx][sy] = 1;
+        
+        dfs(mat, sx + 1, sy, dx, dy, ans, cnt + 1);
+        dfs(mat, sx - 1, sy, dx, dy, ans, cnt + 1);
+        dfs(mat, sx, sy + 1, dx, dy, ans, cnt + 1);
+        dfs(mat, sx, sy - 1, dx, dy, ans, cnt + 1);
+        
+        vis[sx][sy] = 0;
+    }
+};
