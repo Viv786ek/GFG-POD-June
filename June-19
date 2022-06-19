@@ -1,0 +1,75 @@
+
+mailtoamandeepsingh28
+52 minutes ago
+
+class Solution
+{
+   public:
+   Node* reverseBetween(Node* head, int m, int n)
+   {
+       if(!head)
+           return head;
+           
+       Node* ptr1 = head;
+       int count=1;
+       while(ptr1 && count<m-1){
+           ptr1 = ptr1 -> next;
+           ++count;
+       }
+       
+       if(!ptr1)
+           return head;
+       
+       if(m==1)
+           ptr1 = NULL;
+       
+       if(m == n)
+           return head;
+       
+       Node* ptr2 = head;
+       count=1;
+       while(ptr2 && count<=n){
+           ptr2 = ptr2 -> next;
+           ++count;
+       }
+       
+       Node* tail = head;
+       while(tail -> next!=ptr2)
+           tail = tail -> next;
+       
+       if(ptr2){
+           tail -> next = NULL;
+       }
+       
+       Node* prev = NULL;
+       Node* curr;
+       if(m > 1)
+           curr = ptr1 -> next;
+       else
+           curr = head;
+       Node* nextNode;
+       
+       if(m>1)
+           ptr1 -> next = NULL;
+       
+       while(curr){
+           nextNode = curr -> next;
+           curr -> next = prev;
+           prev = curr;
+           curr = nextNode;
+       }
+       if(m>1)
+           ptr1 -> next = prev;
+       
+       ptr1 = prev;
+       while(ptr1 -> next)
+           ptr1 = ptr1 -> next;
+       
+       ptr1 -> next = ptr2;
+       
+       if(m>1)
+           return head;
+       
+       return prev;
+   }
+};
