@@ -1,1 +1,36 @@
-
+void solve(int target,int n,int &ans)
+    {
+        if(n==1 && target>0)
+        {
+            ans++;
+            return ;
+        }
+        for(int i=1;i<target;i++)
+        {
+            solve(target-i,n-1,ans);
+        }
+    }
+    long posIntSol(string s)
+    {
+        int n=1;
+        int target=0;
+        for(int i=0;i<s.length();i++)
+        {
+            if(s[i]=='+') n++;
+            if(s[i]=='=')
+            {
+                i++;
+                while(i<s.length())
+                {
+                    target = target*10 + s[i]-'0';
+                    i++;
+                }
+            }
+        }
+        // make target with n numbers
+        if(target<n) return 0;
+        if(target==n) return 1;
+        int ans=0;
+        solve(target,n,ans);
+        return ans;
+    }
