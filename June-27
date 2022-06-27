@@ -1,0 +1,9 @@
+class Solution {
+  public:
+    vector<int> changeBits(int N) {
+        // code here
+       int n = log2(N)+1;
+       int i = pow(2,n)-1;
+       return {i-N, i};
+    }
+};
