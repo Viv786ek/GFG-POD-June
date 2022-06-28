@@ -1,0 +1,12 @@
+long long sumBetweenTwoKth( long long A[], long long N, long long K1, long long K2)
+    {
+        // Your code goes here
+        sort(A,A+N);
+       long long sum = 0;
+
+
+       for(int i = K1 ;i<K2-1;i++){
+           sum = sum + A[i];
+       } 
+       return sum; 
+    }
