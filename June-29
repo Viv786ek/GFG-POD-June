@@ -1,0 +1,11 @@
+int canReach(int A[], int N) {
+        // code here
+        int r=0;
+      for(int i=0;i<N;i++)
+      {
+          if(r<i)
+          return 0;
+          r=max(r,i+A[i]);
+      }
+      return 1;
+    }
