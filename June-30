@@ -1,0 +1,19 @@
+long long dp[81];
+    long long solve(int n) {
+        if(n <= 3) {
+            return 1;
+        }
+        
+        if(dp[n] != -1) {
+            return dp[n];
+        }
+        
+        return dp[n] =  solve(n-1) + solve(n-4);
+        
+    }
+    long long int arrangeTiles(int N){
+        
+        memset(dp, -1, sizeof(dp));
+        
+        return solve(N);
+    }
